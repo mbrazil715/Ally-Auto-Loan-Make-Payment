@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ally Auto | Payment Agent Script</title>
+    <title>Ally Auto | Payment Extension Script</title>
     <style>
         :root {
             --ally-purple: #5a1e5c;
@@ -188,15 +188,6 @@
             background-color: var(--ally-dark-purple);
         }
 
-        .status-badge {
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 10px;
-            background: #eee;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-
         .footer {
             text-align: center;
             color: var(--text-light);
@@ -215,7 +206,7 @@
 
 <header>
     <div class="logo">ally <span>Auto</span></div>
-    <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-light);">INTERNAL AGENT USE ONLY</div>
+    <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-light);">PAYMENT EXTENSION FLOW</div>
 </header>
 
 <div class="container">
@@ -232,7 +223,7 @@
                 Read Verbatim
             </div>
             <div class="script-box">
-                "Thank you for calling Ally Auto. My name is <strong>[Agent Name]</strong>. I’d be happy to help you with your auto loan today. For your security, may I have your full name and the last four digits of your Social Security Number?"
+                "Thank you for calling Ally Auto. My name is <strong>[Agent Name]</strong>. I understand you're interested in exploring a payment extension for your account. To assist you, may I have your full name and the last four digits of your Social Security Number?"
             </div>
             <div class="data-grid">
                 <div class="data-item">
@@ -240,8 +231,8 @@
                     <div class="value">--</div>
                 </div>
                 <div class="data-item">
-                    <span class="label">Account Number</span>
-                    <div class="value">--</div>
+                    <span class="label">Current Due Date</span>
+                    <div class="value">MM/DD/YYYY</div>
                 </div>
             </div>
         </div>
@@ -251,25 +242,18 @@
     <section class="card">
         <div class="card-header">
             <div class="step-number">2</div>
-            <h2>Identify Payment Need</h2>
+            <h2>Understand Hardship</h2>
         </div>
         <div class="card-content">
             <div class="instruction">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
-                Confirm Balance
+                Listen & Categorize
             </div>
             <div class="script-box">
-                "I see you’re calling to make a payment. Your current amount due is <strong>$[Amount Due]</strong> and it is due on <strong>[Due Date]</strong>. Would you like to pay that amount today, or were you looking to pay a different amount?"
+                "I’m sorry to hear you’re facing some challenges. To see if your account is eligible for an extension, could you briefly share the reason you’re requesting to defer your payment? Also, do you expect this to be a temporary situation?"
             </div>
-            <div class="data-grid">
-                <div class="data-item">
-                    <span class="label">Current Balance</span>
-                    <div class="value">$0.00</div>
-                </div>
-                <div class="data-item">
-                    <span class="label">Next Payment Due</span>
-                    <div class="value">MM/DD/YYYY</div>
-                </div>
+            <div class="compliance-note">
+                <b>AGENT NOTE:</b> Select primary reason in CRM (Medical, Employment, Natural Disaster, etc.) before proceeding to eligibility check.
             </div>
         </div>
     </section>
@@ -278,19 +262,26 @@
     <section class="card">
         <div class="card-header">
             <div class="step-number">3</div>
-            <h2>Payment Method</h2>
+            <h2>Eligibility & Terms</h2>
         </div>
         <div class="card-content">
             <div class="instruction">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                Verify Source
+                Verify System Approval
             </div>
             <div class="script-box">
-                "We can process this using your bank account on file ending in <strong>[Last 4]</strong>, or we can add a new debit card or checking account. Which would you prefer?"
+                "Based on your account history, you are eligible for a <strong>[1 month/30 day]</strong> extension. This would move your next due date from <strong>[Old Date]</strong> to <strong>[New Date]</strong>. Please keep in mind that interest will continue to accrue during this period, which may increase your final payment or extend the term of your loan."
             </div>
             
-            <div class="compliance-note">
-                <b>SECURITY REMINDER:</b> If adding a new card, stay on the line but ensure the customer uses the automated secure entry system if available. Never write down or store CVV codes.
+            <div class="data-grid">
+                <div class="data-item">
+                    <span class="label">New Maturity Date</span>
+                    <div class="value">MM/DD/YYYY</div>
+                </div>
+                <div class="data-item">
+                    <span class="label">Extension Fee (if any)</span>
+                    <div class="value">$0.00</div>
+                </div>
             </div>
         </div>
     </section>
@@ -307,12 +298,12 @@
                 Legal Disclosure
             </div>
             <div class="script-box" style="background-color: #fdfbff;">
-                "By proceeding, you authorize Ally to initiate a one-time electronic payment in the amount of <strong>$[Total Amount]</strong> from your <strong>[Bank/Card Type]</strong> account ending in <strong>[Last 4]</strong> on <strong>[Today's Date]</strong>. Do I have your permission to process this payment now?"
+                "By accepting this extension, you understand that your contract's maturity date will be extended, interest will continue to accrue on your unpaid balance, and you will be responsible for any additional interest resulting from this deferral. Do you agree to these terms and authorize Ally to process this extension today?"
             </div>
             
             <div style="margin-top: 1rem; text-align: right;">
-                <button class="btn" onclick="this.innerHTML='Processing...'; setTimeout(()=> { this.innerHTML='Payment Successful ✓'; this.style.backgroundColor='#2d822d'; }, 1500)">
-                    Confirm & Execute Payment
+                <button class="btn" onclick="this.innerHTML='Processing...'; setTimeout(()=> { this.innerHTML='Extension Approved ✓'; this.style.backgroundColor='#2d822d'; }, 1500)">
+                    Process Extension
                 </button>
             </div>
         </div>
@@ -326,10 +317,10 @@
         </div>
         <div class="card-content">
             <div class="script-box">
-                "Thank you. That payment has been submitted. Your confirmation number is <strong>[Confirmation #]</strong>. You should see this reflected in your account history within one business day. Is there anything else I can help you with today?"
+                "You're all set. Your payment due date has been successfully updated to <strong>[New Date]</strong>. You will receive a confirmation letter in the mail within 7-10 business days. Is there anything else I can help you with?"
             </div>
             <div class="script-box">
-                "Thank you for choosing Ally. Have a great day!"
+                "Thank you for being an Ally customer. Have a great day!"
             </div>
         </div>
     </section>
